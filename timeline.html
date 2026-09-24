@@ -143,6 +143,13 @@
   }
   .upcoming-note{ margin-top:24px; font-size:0.9rem; color:var(--ink-dim); max-width:60ch; }
 
+  @media (max-width:640px){
+    .upcoming-grid{ grid-template-columns:repeat(2,1fr); }
+    .upcoming-card{ padding:22px 14px; }
+    .upcoming-card .dots{ font-size:1.6rem; margin-top:10px; }
+    .upcoming-card .tag{ font-size:0.6rem; padding:4px 7px; margin-top:12px; }
+  }
+
   /* ---------- subscribe ---------- */
   .subscribe{
     background:
