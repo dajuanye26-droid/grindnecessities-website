@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lifestyle Necessities</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#0A0B0D;
+    --bg-elev:#141619;
+    --bg-card:#1B1E23;
+    --ink:#F3EFE7;
+    --ink-dim:#9BA0AA;
+    --ink-faint:#5B606B;
+    --accent:#E6394A;
+    --accent-soft:rgba(230,57,74,0.14);
+    --gold:#D4AF37;
+    --line:rgba(243,239,231,0.10);
+    color-scheme: dark;
+    background: var(--bg);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    padding-inline:0;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--accent); color:#fff; }
+
+  a{ color:inherit; }
+
+  .wrap{ max-width:1080px; margin-inline:auto; padding-inline:24px; }
+  @media (min-width:640px){ .wrap{ padding-inline:40px; } }
+
+  h1,h2,h3{ font-family:'Anton',system-ui,sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:0.01em; text-wrap:balance; margin:0; }
+  p{ margin:0; }
+  .serif{ font-family:'Source Serif 4', Georgia, serif; }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:0.72rem;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,11,13,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:16px; gap:16px;
+  }
+  .brand{ font-family:'Anton',sans-serif; font-size:1rem; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; }
+  .brand span{ color:var(--accent); }
+  nav.links{ display:flex; gap:24px; font-size:0.82rem; font-weight:500; color:var(--ink-dim); }
+  nav.links a{ text-decoration:none; transition:color .15s ease; }
+  nav.links a:hover{ color:var(--ink); }
+  .nav-cta{
+    font-size:0.78rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    background:var(--accent); color:#fff; padding:9px 16px; border-radius:2px; text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:640px){ nav.links{ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-block: 88px 72px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(ellipse 900px 420px at 85% -10%, var(--accent-soft), transparent 60%),
+      var(--bg);
+  }
+  .hero .eyebrow{ display:block; margin-bottom:18px; }
+  .hero h1{
+    font-size:clamp(2.6rem, 8vw, 5.4rem);
+    line-height:0.98;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent); }
+  .hero .lede{
+    margin-top:26px; max-width:46ch; font-size:1.15rem; line-height:1.7; color:var(--ink-dim);
+  }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; align-items:center; }
+  .btn-primary{
+    background:var(--accent); color:#fff; text-decoration:none;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase;
+    padding:15px 26px; border-radius:2px; border:none; cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary:hover{ background:#ff4d5e; transform:translateY(-1px); }
+  .btn-ghost{
+    color:var(--ink-dim); text-decoration:none; font-size:0.85rem; font-weight:600;
+    border-bottom:1px solid var(--ink-faint); padding-bottom:2px;
+  }
+  .btn-ghost:hover{ color:var(--ink); border-color:var(--ink); }
+
+  .stat-row{
+    display:flex; gap:36px; margin-top:56px; flex-wrap:wrap;
+    padding-top:32px; border-top:1px solid var(--line);
+  }
+  .stat b{
+    display:block; font-family:'Anton',sans-serif; font-size:1.8rem; color:var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat span{ font-size:0.78rem; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.08em; }
+
+  /* ---------- section shell ---------- */
+  section{ padding-block:76px; border-bottom:1px solid var(--line); }
+  .section-head{ max-width:60ch; margin-bottom:44px; }
+  .section-head h2{ font-size:clamp(1.7rem,4vw,2.5rem); margin-top:10px; }
+  .section-head p{ margin-top:16px; color:var(--ink-dim); font-size:1.02rem; line-height:1.7; }
+
+  /* ---------- timeline (story) ---------- */
+  .timeline{ display:flex; flex-direction:column; }
+  .tl-item{
+    display:grid; grid-template-columns:64px 1fr; gap:20px;
+    padding-block:26px; border-top:1px solid var(--line);
+  }
+  .tl-item:last-child{ border-bottom:none; }
+  .tl-num{
+    font-family:'Anton',sans-serif; font-size:1.6rem; color:var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .tl-body h3{ font-family:'Inter',sans-serif; text-transform:none; font-weight:700; font-size:1.05rem; letter-spacing:0; }
+  .tl-body p{ margin-top:8px; color:var(--ink-dim); font-size:0.98rem; line-height:1.65; max-width:56ch; }
+  .tl-tag{
+    display:inline-block; margin-top:2px; font-size:0.68rem; font-weight:700; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--gold);
+  }
+
+  /* ---------- pillars ---------- */
+  .pillars{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:760px){ .pillars{ grid-template-columns:1fr; } }
+  .pillar{ background:var(--bg-elev); padding:32px 28px; }
+  .pillar .eyebrow{ color:var(--accent); }
+  .pillar h3{ font-size:1.3rem; margin-top:14px; }
+  .pillar p{ margin-top:14px; color:var(--ink-dim); font-size:0.96rem; line-height:1.65; }
+
+  /* ---------- journal ---------- */
+  .journal-feature{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:4px;
+    padding:36px; position:relative; overflow:hidden;
+  }
+  .journal-feature::before{
+    content:""; position:absolute; inset:0 0 auto 0; height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--gold));
+  }
+  .entry-meta{ display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+  .entry-no{ font-family:'Anton',sans-serif; color:var(--accent); font-size:0.95rem; letter-spacing:0.04em; }
+  .entry-date{ color:var(--ink-faint); font-size:0.85rem; }
+  .journal-feature h3{ margin-top:16px; font-size:clamp(1.4rem,3vw,1.9rem); }
+  .journal-feature .serif{ margin-top:18px; color:var(--ink-dim); font-size:1.05rem; line-height:1.8; max-width:62ch; }
+  .journal-feature .serif + .serif{ margin-top:14px; }
+  .journal-sign{ margin-top:24px; font-size:0.85rem; color:var(--ink-faint); font-style:italic; }
+
+  .gated{ position:relative; margin-top:6px; }
+  .gated-copy{ max-height:104px; overflow:hidden; }
+  .gated-mask{
+    position:absolute; left:0; right:0; bottom:0; height:104px; pointer-events:none;
+    background:linear-gradient(to bottom, transparent, var(--bg-card) 82%);
+  }
+  .gated-cta{ position:relative; margin-top:22px; text-align:center; padding-top:10px; border-top:1px solid var(--line); }
+  .gated-cta .lock{ font-size:1.25rem; display:block; margin-bottom:10px; }
+  .gated-cta p{ color:var(--ink-dim); font-size:0.92rem; max-width:42ch; margin-inline:auto; margin-bottom:18px; line-height:1.6; }
+
+  .journal-note{
+    margin-top:22px; font-size:0.85rem; color:var(--ink-faint); text-align:center;
+  }
+
+  /* ---------- subscribe ---------- */
+  .subscribe{
+    background:
+      radial-gradient(ellipse 700px 360px at 15% 10%, var(--accent-soft), transparent 60%),
+      var(--bg-elev);
+    border-bottom:none;
+  }
+  .sub-card{
+    max-width:640px; margin-inline:auto; text-align:center;
+    border:1px solid var(--line); border-radius:6px; padding:52px 32px; background:var(--bg-card);
+  }
+  .sub-card .eyebrow{ display:block; }
+  .sub-card h2{ margin-top:14px; font-size:clamp(1.8rem,5vw,2.6rem); }
+  .sub-card .serif{ margin-top:16px; color:var(--ink-dim); font-size:1.05rem; line-height:1.65; }
+
+  form.sub-form{
+    display:flex; gap:10px; margin-top:32px; flex-wrap:wrap; justify-content:center;
+  }
+  .sub-form input[type=email]{
+    flex:1 1 260px; min-width:0;
+    background:var(--bg); border:1px solid var(--line); color:var(--ink);
+    padding:15px 16px; border-radius:2px; font-size:0.95rem; font-family:'Inter',sans-serif;
+  }
+  .sub-form input[type=email]:focus{ outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent); }
+  .sub-form input[type=email]::placeholder{ color:var(--ink-faint); }
+  .sub-form button{ flex:0 0 auto; }
+
+  .sub-micro{ margin-top:16px; font-size:0.78rem; color:var(--ink-faint); }
+  .sub-success{
+    margin-top:32px; display:none; align-items:center; justify-content:center; gap:10px;
+    color:var(--ink); font-weight:600; font-size:0.98rem;
+  }
+  .sub-success.show{ display:flex; }
+  .sub-error{ margin-top:14px; color:var(--accent); font-size:0.84rem; display:none; }
+  .sub-error.show{ display:block; }
+
+  /* ---------- footer ---------- */
+  footer{ padding-block:40px 40px; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-brand{ font-family:'Anton',sans-serif; font-size:0.9rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-dim); }
+  .foot-tag{ font-size:0.8rem; color:var(--ink-faint); }
+  .foot-social{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:0.78rem; }
+  .foot-social a{ color:var(--ink-faint); text-decoration:none; transition:color .2s ease; }
+  .foot-social a:hover{ color:var(--accent); }
+  .foot-social span{ color:var(--ink-faint); opacity:0.6; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.in{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <div class="brand">LIFESTYLE <span>NECESSITIES</span></div>
+    <nav class="links">
+      <a href="#story">Story</a>
+      <a href="#standard">The Standard</a>
+      <a href="#journal">Journal</a>
+      <a href="timeline.html">Timeline</a>
+    </nav>
+    <a class="nav-cta" href="#subscribe">Subscribe</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">A weekly journal by DaJuanye &quot;DJ&quot; Wingfield</span>
+    <h1>NOBODY SEES<br>THE <em>WORK.</em><br>EVERYONE SEES<br>THE RESULT.</h1>
+    <p class="lede serif">I played this game from Pop Warner to a preseason shot in the NFL, and I've carried the same standard into building a business from nothing. Every week I write down what hard work and dedication actually look like up close &mdash; and send it straight to your inbox.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#subscribe">Join the Journal</a>
+      <a class="btn-ghost" href="#story">Read my story &darr;</a>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><b>Pop Warner &rarr; NFL</b><span>The Path</span></div>
+      <div class="stat"><b>Weekly</b><span>New Entry</span></div>
+      <div class="stat"><b>Inbox Only</b><span>Full Entries</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Story</span>
+      <h2>Earned every level of this.</h2>
+      <p>I didn't start with anything handed to me. What I have, I built one rep, one grind, one hard year at a time &mdash; and I'm doing it again, from scratch, in business.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-num">01</div>
+        <div class="tl-body">
+          <span class="tl-tag">Pop Warner</span>
+          <h3>Where the standard got set</h3>
+          <p>I picked up the game as a kid and never let go of it. Long before anyone was watching, I was already building the habits &mdash; showing up, doing the extra work, refusing to be outworked.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">02</div>
+        <div class="tl-body">
+          <span class="tl-tag">High School &amp; College</span>
+          <h3>Hardship didn't stop the climb</h3>
+          <p>I dealt with real setbacks along the way &mdash; the kind that end most people's dream quietly. I didn't let it end mine. Every hard year became fuel for the next one.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">03</div>
+        <div class="tl-body">
+          <span class="tl-tag">Preseason, NFL</span>
+          <h3>I made it to the league</h3>
+          <p>From Pop Warner to a preseason roster in the NFL is a road almost nobody finishes. I finished it. That's not a brag &mdash; it's proof the standard works, wherever I point it.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-num">04</div>
+        <div class="tl-body">
+          <span class="tl-tag">Now &mdash; Lifestyle Necessities</span>
+          <h3>Same grind, new field</h3>
+          <p>Football ends for everyone eventually. So I'm pointing the same discipline at building something of my own &mdash; starting in sales, building toward being my own boss. This journal is me documenting that climb in real time, not after I've already made it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="standard">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Standard</span>
+      <h2>What I actually write about.</h2>
+      <p>Not motivational quotes. The real, unglamorous qualities that move you from where you are to where you say you want to be.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="pillars reveal">
+      <div class="pillar">
+        <span class="eyebrow">01</span>
+        <h3>Hard Work</h3>
+        <p>The work nobody claps for. The extra rep, the extra call, the hour before everyone else wakes up. I write about what I'm actually doing that week, not the highlight reel.</p>
+      </div>
+      <div class="pillar">
+        <span class="eyebrow">02</span>
+        <h3>Dedication</h3>
+        <p>Showing up on the weeks it doesn't feel good. Staying with the plan after the excitement wears off &mdash; that's the part that separates people, and the part I hold myself to on paper every week.</p>
+      </div>
+      <div class="pillar">
+        <span class="eyebrow">03</span>
+        <h3>Goal-Driven</h3>
+        <p>Everything I do is pointed at something specific. I break down the goals I'm chasing &mdash; in business and in life &mdash; and the actual steps I'm taking toward them, so you can steal what works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="journal">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Journal</span>
+      <h2>This one's personal.</h2>
+      <p>Full entries don't get posted here for everyone &mdash; they go straight to a subscriber's inbox, every week. Here's a taste of Entry No. 002.</p>
+    </div>
+    <div class="journal-feature reveal">
+      <div class="entry-meta">
+        <span class="entry-no">ENTRY NO. 002</span>
+        <span class="entry-date">Week Two</span>
+      </div>
+      <h3>Entering a Different World</h3>
+      <p class="serif">Last week closed out with some good news &mdash; a new opportunity I've been building toward. But that's not really what this entry is about. It's about something bigger: what it actually feels like to walk out of one world, the only one you've ever known, and into a completely different one.</p>
+      <div class="gated">
+        <div class="gated-copy">
+          <p class="serif">Being an athlete can make you an introvert to everyone who isn't one. You live inside a totally different rhythm for most of your life &mdash; different rooms, different pressure, different people &mdash; and when that ends, the outside world can feel like it's moving at a different speed. For me, that transition has actually been going well. My mental state is in a better place without football than it was with it, and honestly, I think I knew that the moment my last NFL game ended.</p>
+          <p class="serif">What's helped most is accepting things &mdash; the good, the bad, and whatever the outcome turns out to be. I've lived by one line for a long time: if you can look in your own mirror and honestly say you gave everything you had, there's no room left for regret. Showing up and executing, every single day, is what clears that out.</p>
+          <p class="journal-sign">&mdash; DJ</p>
+        </div>
+        <div class="gated-mask"></div>
+      </div>
+      <div class="gated-cta">
+        <span class="lock">&#128274;</span>
+        <p>The rest of this entry &mdash; and every one after it &mdash; is for subscribers only. Nothing here is posted publicly.</p>
+        <a class="btn-primary" href="#subscribe">Unlock the Full Entry</a>
+      </div>
+    </div>
+    <p class="journal-note reveal">New entries land in subscribers' inboxes every week &mdash; this page only ever shows a preview.</p>
+    <p class="journal-note reveal"><a class="btn-ghost" href="timeline.html">See every past entry, in full &rarr;</a></p>
+  </div>
+</section>
+
+<section class="subscribe" id="subscribe">
+  <div class="wrap">
+    <div class="sub-card reveal">
+      <span class="eyebrow">Join the journal</span>
+      <h2>Get next week's entry.</h2>
+      <p class="serif">One honest entry a week on hard work, dedication, and building something from nothing &mdash; written just for the people on this list. It goes to your inbox, never posted anywhere public.</p>
+      <div class="beehiiv-embed">
+        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="3390b181-da19-487d-99ac-da482c583de8"></script>
+      </div>
+      <p class="sub-micro">No spam. One entry a week. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-brand">Lifestyle Necessities</div>
+      <div class="foot-tag">Written weekly by DaJuanye &quot;DJ&quot; Wingfield</div>
+    </div>
+    <div class="foot-social">
+      <a href="https://twitter.com/DjDailyReps" target="_blank" rel="noopener">X: @DjDailyReps</a>
+      <a href="https://instagram.com/duhjuanye" target="_blank" rel="noopener">Instagram: @duhjuanye</a>
+      <a href="https://youtube.com/@duhjuanye" target="_blank" rel="noopener">YouTube: @duhjuanye</a>
+      <span>TikTok: Coming Soon</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

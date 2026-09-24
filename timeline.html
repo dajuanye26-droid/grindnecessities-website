@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline &mdash; Lifestyle Necessities</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#0A0B0D;
+    --bg-elev:#141619;
+    --bg-card:#1B1E23;
+    --ink:#F3EFE7;
+    --ink-dim:#9BA0AA;
+    --ink-faint:#5B606B;
+    --accent:#E6394A;
+    --accent-soft:rgba(230,57,74,0.14);
+    --gold:#D4AF37;
+    --line:rgba(243,239,231,0.10);
+    color-scheme: dark;
+    background: var(--bg);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    padding-inline:0;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--accent); color:#fff; }
+
+  a{ color:inherit; }
+
+  .wrap{ max-width:1080px; margin-inline:auto; padding-inline:24px; }
+  @media (min-width:640px){ .wrap{ padding-inline:40px; } }
+
+  h1,h2,h3{ font-family:'Anton',system-ui,sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:0.01em; text-wrap:balance; margin:0; }
+  p{ margin:0; }
+  .serif{ font-family:'Source Serif 4', Georgia, serif; }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:0.72rem;
+    letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);
+  }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,11,13,0.82); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:16px; gap:16px;
+  }
+  .brand{ font-family:'Anton',sans-serif; font-size:1rem; letter-spacing:0.04em; text-transform:uppercase; white-space:nowrap; text-decoration:none; }
+  .brand span{ color:var(--accent); }
+  nav.links{ display:flex; gap:24px; font-size:0.82rem; font-weight:500; color:var(--ink-dim); }
+  nav.links a{ text-decoration:none; transition:color .15s ease; }
+  nav.links a:hover{ color:var(--ink); }
+  nav.links a.active{ color:var(--ink); }
+  .nav-cta{
+    font-size:0.78rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase;
+    background:var(--accent); color:#fff; padding:9px 16px; border-radius:2px; text-decoration:none;
+    white-space:nowrap;
+  }
+  @media (max-width:640px){ nav.links{ display:none; } }
+
+  .btn-primary{
+    background:var(--accent); color:#fff; text-decoration:none;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.04em; text-transform:uppercase;
+    padding:15px 26px; border-radius:2px; border:none; cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+    display:inline-block;
+  }
+  .btn-primary:hover{ background:#ff4d5e; transform:translateY(-1px); }
+  .btn-ghost{
+    color:var(--ink-dim); text-decoration:none; font-size:0.85rem; font-weight:600;
+    border-bottom:1px solid var(--ink-faint); padding-bottom:2px;
+  }
+  .btn-ghost:hover{ color:var(--ink); border-color:var(--ink); }
+
+  /* ---------- page hero ---------- */
+  .page-hero{
+    padding-block: 72px 56px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(ellipse 900px 420px at 85% -10%, var(--accent-soft), transparent 60%),
+      var(--bg);
+  }
+  .page-hero .eyebrow{ display:block; margin-bottom:18px; }
+  .page-hero h1{ font-size:clamp(2.2rem, 6vw, 3.6rem); line-height:1.02; }
+  .page-hero .lede{ margin-top:22px; max-width:56ch; font-size:1.08rem; line-height:1.7; color:var(--ink-dim); }
+
+  /* ---------- section shell ---------- */
+  section{ padding-block:72px; border-bottom:1px solid var(--line); }
+  .section-head{ max-width:60ch; margin-bottom:40px; }
+  .section-head h2{ font-size:clamp(1.6rem,4vw,2.3rem); margin-top:10px; }
+  .section-head p{ margin-top:16px; color:var(--ink-dim); font-size:1.02rem; line-height:1.7; }
+
+  /* ---------- full journal entries (public archive) ---------- */
+  .archive-list{ display:flex; flex-direction:column; gap:28px; }
+  .archive-entry{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:4px;
+    padding:36px; position:relative; overflow:hidden;
+  }
+  .archive-entry::before{
+    content:""; position:absolute; inset:0 0 auto 0; height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--gold));
+  }
+  .entry-meta{ display:flex; gap:14px; align-items:baseline; flex-wrap:wrap; }
+  .entry-no{ font-family:'Anton',sans-serif; color:var(--accent); font-size:0.95rem; letter-spacing:0.04em; }
+  .entry-date{ color:var(--ink-faint); font-size:0.85rem; }
+  .archive-entry h3{ margin-top:16px; font-size:clamp(1.4rem,3vw,1.9rem); }
+  .archive-entry .serif{ margin-top:18px; color:var(--ink-dim); font-size:1.05rem; line-height:1.8; max-width:64ch; }
+  .archive-entry .serif + .serif{ margin-top:14px; }
+  .journal-sign{ margin-top:22px; font-size:0.85rem; color:var(--ink-faint); font-style:italic; }
+  .archive-open-tag{
+    position:absolute; top:20px; right:20px; font-size:0.68rem; font-weight:700; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-faint); border:1px solid var(--line); border-radius:2px;
+    padding:5px 9px;
+  }
+
+  /* ---------- upcoming ---------- */
+  .upcoming-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .upcoming-card{
+    background:var(--bg-elev); padding:32px 28px; text-align:center;
+  }
+  .upcoming-card .entry-no{ display:block; }
+  .upcoming-card .dots{
+    font-family:'Anton',sans-serif; font-size:2.2rem; color:var(--ink-faint); letter-spacing:0.3em;
+    margin-top:14px;
+  }
+  .upcoming-card .tag{
+    display:inline-block; margin-top:16px; font-size:0.68rem; font-weight:700; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-faint); border:1px dashed var(--ink-faint); border-radius:2px;
+    padding:5px 10px;
+  }
+  .upcoming-note{ margin-top:24px; font-size:0.9rem; color:var(--ink-dim); max-width:60ch; }
+
+  /* ---------- subscribe ---------- */
+  .subscribe{
+    background:
+      radial-gradient(ellipse 700px 360px at 15% 10%, var(--accent-soft), transparent 60%),
+      var(--bg-elev);
+    border-bottom:none;
+  }
+  .sub-card{
+    max-width:640px; margin-inline:auto; text-align:center;
+    border:1px solid var(--line); border-radius:6px; padding:52px 32px; background:var(--bg-card);
+  }
+  .sub-card .eyebrow{ display:block; }
+  .sub-card h2{ margin-top:14px; font-size:clamp(1.8rem,5vw,2.6rem); }
+  .sub-card .serif{ margin-top:16px; color:var(--ink-dim); font-size:1.05rem; line-height:1.65; }
+  .sub-micro{ margin-top:16px; font-size:0.78rem; color:var(--ink-faint); }
+
+  /* ---------- footer ---------- */
+  footer{ padding-block:40px 40px; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+  .foot-brand{ font-family:'Anton',sans-serif; font-size:0.9rem; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-dim); }
+  .foot-tag{ font-size:0.8rem; color:var(--ink-faint); }
+  .foot-social{ display:flex; gap:18px; flex-wrap:wrap; margin-top:14px; font-size:0.78rem; }
+  .foot-social a{ color:var(--ink-faint); text-decoration:none; transition:color .2s ease; }
+  .foot-social a:hover{ color:var(--accent); }
+  .foot-social span{ color:var(--ink-faint); opacity:0.6; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+    .reveal.in{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-row">
+    <a class="brand" href="index.html">LIFESTYLE <span>NECESSITIES</span></a>
+    <nav class="links">
+      <a href="index.html#story">Story</a>
+      <a href="index.html#standard">The Standard</a>
+      <a href="index.html#journal">Journal</a>
+      <a href="timeline.html" class="active">Timeline</a>
+    </nav>
+    <a class="nav-cta" href="index.html#subscribe">Subscribe</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">The Full Record</span>
+    <h1>Every Entry. <em style="font-style:normal;color:var(--accent);">One Place.</em></h1>
+    <p class="lede serif">The current week's entry only gets a preview &mdash; the rest goes to subscribers first. But once an entry's had its week, it opens up here for good, in full, for anyone. This page also tracks what's still ahead.</p>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Previous Entries</span>
+      <h2>Already out. Now public.</h2>
+      <p>These went to subscribers first. Now they're open for anyone to read, start to finish.</p>
+    </div>
+    <div class="archive-list">
+      <div class="archive-entry reveal">
+        <span class="archive-open-tag">Full Entry</span>
+        <div class="entry-meta">
+          <span class="entry-no">ENTRY NO. 001</span>
+          <span class="entry-date">Week One</span>
+        </div>
+        <h3>Why I Traded the Field for the Grind</h3>
+        <p class="serif">People assume that once you've made it to the NFL, even for a preseason, the hard part is over. It isn't. The hard part is what you do the day nobody's handing you a jersey anymore.</p>
+        <p class="serif">I spent years building the kind of work ethic that gets a kid from Pop Warner to a preseason roster &mdash; through setbacks that would've ended it for a lot of people. That work ethic didn't retire when football did. It just needed a new field. Right now that field is sales, and eventually it's a business that's fully mine.</p>
+        <p class="serif">This journal is me writing it down as it happens &mdash; the wins, the weeks that don't go how I planned, and the discipline it takes to keep showing up anyway. If you're building something of your own, I think you'll recognize a lot of it.</p>
+        <p class="journal-sign">&mdash; DJ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="upcoming">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Upcoming</span>
+      <h2>What's still ahead.</h2>
+      <p>No spoilers &mdash; just a marker that it's coming. Subscribers get it first, every time.</p>
+    </div>
+    <div class="upcoming-grid reveal">
+      <div class="upcoming-card">
+        <span class="entry-no">ENTRY NO. 003</span>
+        <div class="dots">&hellip;</div>
+        <span class="tag">Coming Soon</span>
+      </div>
+      <div class="upcoming-card">
+        <span class="entry-no">ENTRY NO. 004</span>
+        <div class="dots">&hellip;</div>
+        <span class="tag">Coming Soon</span>
+      </div>
+      <div class="upcoming-card">
+        <span class="entry-no">ENTRY NO. 005</span>
+        <div class="dots">&hellip;</div>
+        <span class="tag">Coming Soon</span>
+      </div>
+    </div>
+    <p class="upcoming-note reveal">Want this week's? <a class="btn-ghost" href="index.html#journal">Read the current preview</a> or <a class="btn-ghost" href="index.html#subscribe">join the list</a> to get it in full.</p>
+  </div>
+</section>
+
+<section class="subscribe" id="subscribe">
+  <div class="wrap">
+    <div class="sub-card reveal">
+      <span class="eyebrow">Join the journal</span>
+      <h2>Get next week's entry.</h2>
+      <p class="serif">One honest entry a week on hard work, dedication, and building something from nothing &mdash; written just for the people on this list. It goes to your inbox, never posted anywhere public &mdash; until it's added here.</p>
+      <div class="beehiiv-embed">
+        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="3390b181-da19-487d-99ac-da482c583de8"></script>
+      </div>
+      <p class="sub-micro">No spam. One entry a week. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-brand">Lifestyle Necessities</div>
+      <div class="foot-tag">Written weekly by DaJuanye &quot;DJ&quot; Wingfield</div>
+    </div>
+    <div class="foot-social">
+      <a href="https://twitter.com/DjDailyReps" target="_blank" rel="noopener">X: @DjDailyReps</a>
+      <a href="https://instagram.com/duhjuanye" target="_blank" rel="noopener">Instagram: @duhjuanye</a>
+      <a href="https://youtube.com/@duhjuanye" target="_blank" rel="noopener">YouTube: @duhjuanye</a>
+      <span>TikTok: Coming Soon</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>
