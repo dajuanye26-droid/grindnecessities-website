@@ -225,7 +225,6 @@
     <p class="lede serif">Live totals from the Life After Sports survey. Written answers stay private; only multiple-choice totals are shown here.</p>
     <div id="notice"></div>
     <div class="stat-row" id="stats">
-      <div class="stat"><b id="stat-count">&mdash;</b><span>Responses</span></div>
       <div class="stat"><b id="stat-prepared">&mdash;</b><span>Avg. preparedness / 5</span></div>
       <div class="stat"><b id="stat-top">&mdash;</b><span>Top challenge</span></div>
     </div>
@@ -326,7 +325,7 @@
     t.items.forEach(function(item){
       var pct = t.answered ? Math.round(item.count / t.answered * 100) : 0;
       var row = el('div', 'bar-row');
-      row.title = item.label + ': ' + item.count + ' of ' + t.answered + ' (' + pct + '%)';
+      row.title = item.label + ': ' + pct + '%';
       var label = q.type === 'scale'
         ? item.label + (item.label == q.min ? ' · ' + q.minLabel : item.label == q.max ? ' · ' + q.maxLabel : '')
         : item.label;
@@ -337,7 +336,6 @@
       track.appendChild(fill);
       row.appendChild(track);
       var value = el('span', 'bar-value', pct + '%');
-      value.appendChild(el('small', null, item.count));
       row.appendChild(value);
       bars.appendChild(row);
       requestAnimationFrame(function(){ fill.style.width = (item.count / max * 100) + '%'; });
@@ -346,7 +344,6 @@
   }
 
   function render(summary){
-    document.getElementById('stat-count').textContent = summary.count;
     chartsEl.innerHTML = '';
 
     if (!summary.count) {
@@ -374,7 +371,7 @@
         var card = el('div', 'chart');
         card.appendChild(el('span', 'q-num', String(num).padStart(2, '0')));
         card.appendChild(el('h3', null, q.label));
-        card.appendChild(el('p', 'sub', (q.type === 'checkbox' ? 'Share of respondents who selected each · ' : '') + t.answered + ' answered'));
+        if (q.type === 'checkbox') card.appendChild(el('p', 'sub', 'Share of respondents who selected each'));
 
         if (q.type === 'scale') {
           var sum = 0, n = 0;
