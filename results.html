@@ -7,9 +7,9 @@
 <meta name="description" content="Live results from the Life After Sports survey: what former athletes say about the challenges, positives, and support that matter after competitive sports.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Life After Sports Results — Lifestyle Necessities">
-<link rel="canonical" href="https://grindnecessities.com/results.html">
+<link rel="canonical" href="https://grindnecessities.com/results">
 <meta property="og:description" content="What former athletes say about life after sports. Live survey results.">
-<meta property="og:url" content="https://grindnecessities.com/results.html">
+<meta property="og:url" content="https://grindnecessities.com/results">
 <meta property="og:image" content="https://grindnecessities.com/apple-touch-icon.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Life After Sports Results">
@@ -201,16 +201,16 @@
 
 <header class="nav">
   <div class="wrap nav-row">
-    <a class="brand" href="index.html">LIFESTYLE <span>NECESSITIES</span></a>
+    <a class="brand" href="/">LIFESTYLE <span>NECESSITIES</span></a>
     <nav class="links" id="nav-links">
-      <a href="index.html#story">Story</a>
-      <a href="index.html#standard">The Standard</a>
-      <a href="index.html#journal">Journal</a>
-      <a href="timeline.html">Timeline</a>
-      <a href="survey.html" class="active">Survey</a>
+      <a href="/#story">Story</a>
+      <a href="/#standard">The Standard</a>
+      <a href="/#journal">Journal</a>
+      <a href="timeline">Timeline</a>
+      <a href="survey" class="active">Survey</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-cta" href="index.html#subscribe">Subscribe</a>
+      <a class="nav-cta" href="/#subscribe">Subscribe</a>
       <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -237,7 +237,7 @@
   <div class="cta-band">
     <h2>Haven&rsquo;t taken it yet?</h2>
     <p>Former athlete at any level? Add your experience. It takes 3&ndash;4 minutes and it&rsquo;s anonymous.</p>
-    <a class="btn-primary" href="survey.html">Take the survey</a>
+    <a class="btn-primary" href="survey">Take the survey</a>
   </div>
 </main>
 
@@ -350,7 +350,7 @@
       var empty = el('div', 'empty');
       empty.appendChild(el('p', null, 'No responses yet. Be the first to share your story.'));
       var a = el('a', 'btn-primary', 'Take the survey');
-      a.href = 'survey.html';
+      a.href = 'survey';
       empty.appendChild(a);
       chartsEl.appendChild(empty);
       return;
